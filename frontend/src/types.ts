@@ -12,3 +12,14 @@ export interface EmailCreate {
   subject: string;
   body: string;
 }
+
+export interface BatchUploadResponse {
+  success_count: number;
+  failed_count: number;
+  total_count: number;
+  failed_emails: Array<{
+    email: EmailCreate;
+    error: string;
+  }>;
+  message: string;
+}

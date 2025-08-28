@@ -1,12 +1,22 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 from database import CategoryEnum
 
 class EmailCreate(BaseModel):
     from_address: str
     subject: str
     body: str
+
+class EmailBatchUpload(BaseModel):
+    emails: List[EmailCreate]
+
+class BatchUploadResponse(BaseModel):
+    success_count: int
+    failed_count: int
+    total_count: int
+    failed_emails: List[dict]
+    message: str
 
 class EmailResponse(BaseModel):
     id: int

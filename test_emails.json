@@ -1,0 +1,17 @@
+[
+  {
+    "from_address": "customer@company.com",
+    "subject": "Billing inquiry about my recent charge",
+    "body": "Hi, I noticed a charge of $29.99 on my credit card yesterday that I don't recognize. Can you help me understand what this charge is for? I'd like to review my billing history and make sure everything is accurate. Please send me a detailed invoice or explanation of this charge."
+  },
+  {
+    "from_address": "tech_user@domain.com", 
+    "subject": "Website not loading properly",
+    "body": "Hello support team, I'm having trouble accessing your website. When I try to login, I get a 500 internal server error. I've tried clearing my browser cache and using different browsers but the issue persists. This is preventing me from accessing my account. Can you please look into this technical issue?"
+  },
+  {
+    "from_address": "happy_customer@email.com",
+    "subject": "Great service experience",
+    "body": "I wanted to reach out and say thank you for the excellent customer service I received yesterday. Your team was very helpful and resolved my issue quickly. I really appreciate the professional and friendly approach. Keep up the great work!"
+  }
+]
