@@ -69,7 +69,17 @@ function App() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleString();
+    // Create date from UTC string and convert to local time
+    const date = new Date(dateString + 'Z'); // Add 'Z' to indicate UTC if not present
+    return date.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+      timeZoneName: 'short'
+    });
   };
 
   return (

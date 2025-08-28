@@ -22,17 +22,21 @@
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.1) 75%);
-  background-size: 20px 20px;
+  left: -50px;
+  width: calc(100% + 100px);
+  height: 100%;
+  background: linear-gradient(45deg, 
+    rgba(255,255,255,0.08) 25%, 
+    transparent 25%, 
+    transparent 75%, 
+    rgba(255,255,255,0.08) 75%);
+  background-size: 24px 24px;
   animation: shimmer 20s linear infinite;
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100px); }
-  100% { transform: translateX(100px); }
+  0% { transform: translateX(-50px); }
+  100% { transform: translateX(50px); }
 }
 
 .header h1 {
@@ -252,31 +256,39 @@
 }
 
 .email-category {
-  padding: 4px 12px;
-  border-radius: 15px;
+  padding: 6px 16px;
+  border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
+}
+
+.email-category:hover {
+  transform: scale(1.05);
 }
 
 .category-billing {
-  background: #fef3c7;
-  color: #92400e;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: white;
 }
 
 .category-technical {
-  background: #fee2e2;
-  color: #991b1b;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
 }
 
 .category-feedback {
-  background: #dbeafe;
-  color: #1e40af;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
 }
 
 .category-other {
-  background: #e5e7eb;
-  color: #374151;
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: white;
 }
 
 .email-subject {
