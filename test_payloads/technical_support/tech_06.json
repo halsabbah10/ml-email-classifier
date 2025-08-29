@@ -1,0 +1,5 @@
+{
+  "from_address": "zain@users.net",
+  "subject": "File upload stalls at 99%",
+  "body": "Hi,\n\nWhen uploading a 50MB CSV, the progress reaches 99% and freezes. Is there a size cap or antivirus scanning at the edge?\n\nRegards,\nZain"
+}

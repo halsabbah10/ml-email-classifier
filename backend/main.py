@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 from datetime import datetime
+from contextlib import asynccontextmanager
 import os
 import json
 
@@ -10,7 +11,16 @@ from database import get_db, init_db, Email
 from schemas import EmailCreate, EmailResponse, EmailBatchUpload, BatchUploadResponse
 from ml_classifier import MLEmailClassifier
 
-app = FastAPI(title="Email Classifier API")
+classifier = MLEmailClassifier()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    init_db()
+    yield
+    # Shutdown (cleanup code would go here if needed)
+
+app = FastAPI(title="Email Classifier API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -19,12 +29,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-classifier = MLEmailClassifier()
-
-@app.on_event("startup")
-def startup_event():
-    init_db()
 
 @app.post("/api/emails", response_model=EmailResponse)
 def create_email(email: EmailCreate, db: Session = Depends(get_db)):

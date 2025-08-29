@@ -15,6 +15,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
+    networks:
+      - email_network
 
   backend:
     build:
@@ -22,15 +24,19 @@ services:
       dockerfile: Dockerfile
     container_name: email_classifier_backend
     ports:
-      - "8000:8000"
+      - "8002:8002"
     environment:
       DATABASE_URL: mysql+pymysql://root:password@mysql:3306/email_classifier
-      API_PORT: 8000
+      API_PORT: 8002
     depends_on:
       mysql:
         condition: service_healthy
     volumes:
       - ./backend:/app
+      - ./data:/app/data
+    networks:
+      - email_network
+    restart: unless-stopped
 
   frontend:
     build:
@@ -40,9 +46,16 @@ services:
     ports:
       - "3000:3000"
     environment:
-      REACT_APP_API_URL: http://localhost:8000
+      REACT_APP_API_URL: http://localhost:8002
     depends_on:
       - backend
+    networks:
+      - email_network
+    restart: unless-stopped
 
 volumes:
   mysql_data:
+
+networks:
+  email_network:
+    driver: bridge

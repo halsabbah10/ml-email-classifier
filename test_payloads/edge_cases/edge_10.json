@@ -1,0 +1,5 @@
+{
+  "from_address": "combo@mix.com",
+  "subject": "Discount missing and SSO loop",
+  "body": "Promo code didn’t apply, and SSO now loops back to the login page."
+}

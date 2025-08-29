@@ -1,0 +1,5 @@
+{
+  "from_address": "sara@biz.org",
+  "subject": "API returning 503 during peak hours",
+  "body": "Hi,\n\nOur nightly job fails with HTTP 503 from the /reports API between 02:00–03:00 UTC. Please check server load and rate limits.\n\nBest,\nSara"
+}

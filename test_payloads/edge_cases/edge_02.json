@@ -1,0 +1,5 @@
+{
+  "from_address": "no-reply@unknown.com",
+  "subject": "",
+  "body": "Body without subject, testing default handling."
+}

@@ -1,0 +1,5 @@
+{
+  "from_address": "noura@client.io",
+  "subject": "VAT amount seems incorrect on invoice #1003",
+  "body": "Hello Billing,\n\nMy receipt shows the payment was posted twice. Please reverse the duplicate transaction and share a corrected invoice.\n\nThank you,\nNoura"
+}

@@ -1,0 +1,5 @@
+{
+  "from_address": "amal@client.io",
+  "subject": "Credit card declined but I was still charged",
+  "body": "Hello,\n\nMy card was declined initially but I still see a pending charge. Please cancel the pending amount and confirm.\n\nAmal"
+}

@@ -1,0 +1,5 @@
+{
+  "from_address": "weird+alias@domain.com",
+  "subject": "Odd alias test",
+  "body": "Testing plus addressing and special routing."
+}

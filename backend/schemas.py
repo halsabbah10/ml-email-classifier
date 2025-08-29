@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional, List
+from typing import List
 from database import CategoryEnum
 
 class EmailCreate(BaseModel):

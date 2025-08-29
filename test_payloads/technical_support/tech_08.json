@@ -1,0 +1,5 @@
+{
+  "from_address": "yousef@mailbox.co",
+  "subject": "Dashboard export throws timeout",
+  "body": "Hello,\n\nExporting a 90‑day dashboard report ends with a timeout. Can you extend the server timeout or suggest pagination?\n\nRegards,\nYousef"
+}

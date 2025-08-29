@@ -1,0 +1,5 @@
+{
+  "from_address": "comma@cases.com",
+  "subject": "Subject, with, commas",
+  "body": "Body, also, with, many, commas, to, test, parsing."
+}

@@ -1,0 +1,5 @@
+{
+  "from_address": "encoded@cases.com",
+  "subject": "Mojibake test Ä î ô",
+  "body": "Body with odd characters: Ä, î, ô, and emoji 😄 — ensure UTF‑8 handling."
+}

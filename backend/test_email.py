@@ -2,8 +2,10 @@
 import requests
 import json
 import time
+import tempfile
+import os
 
-API_URL = "http://localhost:8000"
+API_URL = "http://localhost:8002"
 
 test_emails = [
     {
@@ -47,7 +49,7 @@ def test_api():
             return
     except Exception as e:
         print(f"✗ Cannot connect to API: {e}")
-        print("Make sure the backend is running on port 8000")
+        print("Make sure the backend is running on port 8002")
         return
     
     # Submit test emails
@@ -95,5 +97,80 @@ def test_api():
     print("\n" + "-" * 50)
     print("Testing complete! Check http://localhost:3000 to view the emails in the web interface.")
 
+def test_json_upload():
+    print("\nTesting JSON File Upload...")
+    print("-" * 30)
+    
+    # Create test JSON files
+    test_json_data1 = [
+        {
+            "from_address": "upload_test1@example.com",
+            "subject": "Billing inquiry via upload",
+            "body": "I have a question about my invoice charges. Please help me understand the billing details."
+        },
+        {
+            "from_address": "upload_test2@example.com", 
+            "subject": "Technical issue via upload",
+            "body": "The application is crashing when I try to save my work. This is a critical bug."
+        }
+    ]
+    
+    test_json_data2 = {
+        "from_address": "upload_test3@example.com",
+        "subject": "Great feedback via upload", 
+        "body": "I love the new features you've added! The user interface is much better now."
+    }
+    
+    try:
+        # Create temporary JSON files
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f1:
+            json.dump(test_json_data1, f1)
+            file1_path = f1.name
+            
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f2:
+            json.dump(test_json_data2, f2)
+            file2_path = f2.name
+        
+        print(f"Created test files: {os.path.basename(file1_path)}, {os.path.basename(file2_path)}")
+        
+        # Test single file upload
+        print("\nTesting single file upload...")
+        with open(file1_path, 'rb') as f:
+            files = {'files': f}
+            response = requests.post(f"{API_URL}/api/emails/upload-json", files=files)
+            
+        if response.status_code == 200:
+            result = response.json()
+            print(f"✓ Single file upload successful: {result['success_count']} emails processed")
+        else:
+            print(f"✗ Single file upload failed: {response.status_code}")
+        
+        # Test multiple file upload
+        print("\nTesting multiple file upload...")
+        with open(file1_path, 'rb') as f1, open(file2_path, 'rb') as f2:
+            files = [
+                ('files', f1),
+                ('files', f2)
+            ]
+            response = requests.post(f"{API_URL}/api/emails/upload-json", files=files)
+            
+        if response.status_code == 200:
+            result = response.json()
+            print(f"✓ Multiple file upload successful: {result['success_count']} emails, {result['failed_count']} failed")
+            print(f"  Message: {result['message']}")
+        else:
+            print(f"✗ Multiple file upload failed: {response.status_code}")
+            
+    except Exception as e:
+        print(f"✗ JSON upload test error: {e}")
+    finally:
+        # Clean up temporary files
+        try:
+            os.unlink(file1_path)
+            os.unlink(file2_path)
+        except (OSError, FileNotFoundError):
+            pass
+
 if __name__ == "__main__":
     test_api()
+    test_json_upload()

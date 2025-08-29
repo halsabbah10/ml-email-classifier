@@ -1,0 +1,5 @@
+{
+  "from_address": "reem@community.bh",
+  "subject": "Observation: Loading spinner lacks progress hint",
+  "body": "Dear Team,\n\nA progress indicator during long loads would set better expectations than a static spinner.\n\nRegards,\nReem"
+}

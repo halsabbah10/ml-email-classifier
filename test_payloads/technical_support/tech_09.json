@@ -1,0 +1,5 @@
+{
+  "from_address": "noura@biz.org",
+  "subject": "Integration with CRM stopped syncing",
+  "body": "Team,\n\nOur CRM integration stopped syncing contacts at noon. The logs show 401 Unauthorized from your OAuth refresh endpoint.\n\nThanks,\nNoura"
+}

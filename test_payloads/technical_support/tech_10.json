@@ -1,0 +1,5 @@
+{
+  "from_address": "zain@school.edu",
+  "subject": "Search results inconsistent across browsers",
+  "body": "Hi,\n\nSearch returns different items in Safari vs Chrome for the same query. Could this be a caching or locale issue?\n\nBest,\nZain"
+}

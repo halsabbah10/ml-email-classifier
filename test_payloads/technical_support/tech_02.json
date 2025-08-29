@@ -1,0 +1,5 @@
+{
+  "from_address": "sami@ngo.org",
+  "subject": "2FA code is not accepted",
+  "body": "Hello,\n\nThe 2FA code is consistently rejected even when entered immediately. Is there clock skew or a known issue with TOTP?\n\nRegards,\nSami"
+}
