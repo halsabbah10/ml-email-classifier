@@ -45,9 +45,6 @@ frontend/.env.production.local
 .DS_Store
 
 # Database
-*.db
-*.sqlite
-*.sqlite3
 mysql_data/
 
 # ML Model (can be regenerated)
