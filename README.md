@@ -47,7 +47,7 @@ An advanced AI-powered email classification system that automatically categorize
 
 1. **Clone and navigate to the project:**
 ```bash
-git clone <repository>
+git clone https://github.com/halsabbah10/ml-email-classifier
 cd "email classifier"
 ```
 
