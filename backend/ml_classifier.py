@@ -10,7 +10,8 @@ from database import CategoryEnum
 
 class MLEmailClassifier:
     def __init__(self):
-        self.model_path = 'email_classifier_model.joblib'
+        # Define model path
+        self.model_path = 'email_classifier.pkl'
         self.pipeline = None
         self.load_or_train_model()
     
@@ -135,7 +136,7 @@ class MLEmailClassifier:
     def load_or_train_model(self):
         """Load existing model or train a new one"""
         if os.path.exists(self.model_path):
-            print("Loading existing ML model...")
+            print("Loading ML model...")
             self.pipeline = joblib.load(self.model_path)
         else:
             print("No existing model found. Training new model...")
@@ -170,13 +171,20 @@ class MLEmailClassifier:
         
         text = f"{subject} {body}"
         prediction = self.pipeline.predict([text])[0]
-        probabilities = self.pipeline.predict_proba([text])[0]
-        classes = self.pipeline.classes_
         
-        confidence_scores = dict(zip(classes, probabilities))
+        # Some models don't have predict_proba (like LinearSVC)
+        try:
+            probabilities = self.pipeline.predict_proba([text])[0]
+            classes = self.pipeline.classes_
+            confidence_scores = dict(zip(classes, probabilities))
+            confidence = max(probabilities)
+        except AttributeError:
+            # For models without probability support
+            confidence_scores = {prediction: 1.0}
+            confidence = 1.0
         
         return {
             'prediction': prediction,
-            'confidence': max(probabilities),
+            'confidence': confidence,
             'all_scores': confidence_scores
         }

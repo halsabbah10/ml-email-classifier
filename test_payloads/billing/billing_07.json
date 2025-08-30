@@ -1,5 +1,0 @@
-{
-  "from_address": "sara@customer.com",
-  "subject": "Overcharge detected on subscription renewal",
-  "body": "Team,\n\nThe renewal triggered an overcharge compared to the advertised rate. Please adjust and issue a refund for the excess.\n\nThanks,\nSara"
-}

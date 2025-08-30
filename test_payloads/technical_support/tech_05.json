@@ -1,5 +1,0 @@
-{
-  "from_address": "fatima@customer.com",
-  "subject": "SSO login loop after redirect",
-  "body": "Hello,\n\nAfter SSO via Azure AD, we get redirected back into a login loop. Session cookie seems to be dropped. Any guidance?\n\nFatima"
-}

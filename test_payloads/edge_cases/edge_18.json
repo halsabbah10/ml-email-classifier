@@ -1,5 +1,0 @@
-{
-  "from_address": "newline@cases.com",
-  "subject": "Multiple\nLines in Subject",
-  "body": "Subject with newline should still parse; body is normal."
-}

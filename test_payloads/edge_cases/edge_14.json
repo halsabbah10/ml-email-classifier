@@ -1,5 +1,0 @@
-{
-  "from_address": "wrap@cases.com",
-  "subject": "Edge wrapping ✔︎ unicode ✓",
-  "body": "Body contains unicode symbols: ✓ ✔︎ — • © ® ™ and accented letters: café, jalapeño, façade."
-}

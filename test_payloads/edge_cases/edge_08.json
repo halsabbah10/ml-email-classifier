@@ -1,5 +1,0 @@
-{
-  "from_address": "ops@mix.com",
-  "subject": "Card declined & webhook failing",
-  "body": "Card was declined but a pending charge appears, and our webhook validation fails now."
-}

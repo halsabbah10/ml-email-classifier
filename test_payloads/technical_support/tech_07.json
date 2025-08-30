@@ -1,5 +1,0 @@
-{
-  "from_address": "layla@startup.io",
-  "subject": "Notifications not delivered to mobile app",
-  "body": "Support,\n\nPush notifications are not reaching our iOS devices though Android works. Could APNs certs be expired?\n\nThanks,\nLayla"
-}

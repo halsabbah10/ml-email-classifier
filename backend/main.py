@@ -49,8 +49,34 @@ def create_email(email: EmailCreate, db: Session = Depends(get_db)):
     return db_email
 
 @app.get("/api/emails", response_model=List[EmailResponse])
-def get_emails(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    emails = db.query(Email).order_by(Email.received_at.desc()).offset(skip).limit(limit).all()
+def get_emails(
+    skip: int = 0, 
+    limit: int = 100, 
+    sort_by: str = "received_at", 
+    sort_order: str = "desc",
+    db: Session = Depends(get_db)
+):
+    query = db.query(Email)
+    
+    # Determine sort column
+    if sort_by == "received_at":
+        sort_column = Email.received_at
+    elif sort_by == "category":
+        sort_column = Email.category
+    elif sort_by == "from_address":
+        sort_column = Email.from_address
+    elif sort_by == "subject":
+        sort_column = Email.subject
+    else:
+        sort_column = Email.received_at  # Default fallback
+    
+    # Apply sorting
+    if sort_order.lower() == "asc":
+        query = query.order_by(sort_column.asc())
+    else:
+        query = query.order_by(sort_column.desc())
+    
+    emails = query.offset(skip).limit(limit).all()
     return emails
 
 @app.get("/api/emails/{email_id}", response_model=EmailResponse)
@@ -148,6 +174,21 @@ async def upload_json_files(files: List[UploadFile], db: Session = Depends(get_d
         failed_emails=all_failed,
         message=f"Processed {len(files)} files: {total_success} emails succeeded, {total_failed} failed"
     )
+
+@app.delete("/api/emails/clear-all")
+def clear_all_emails(db: Session = Depends(get_db)):
+    """Clear all emails from the database"""
+    try:
+        deleted_count = db.query(Email).count()
+        db.query(Email).delete()
+        db.commit()
+        return {
+            "message": f"Successfully deleted {deleted_count} emails",
+            "deleted_count": deleted_count
+        }
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Failed to clear emails: {str(e)}")
 
 @app.get("/api/health")
 def health_check():

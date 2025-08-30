@@ -1,5 +1,0 @@
-{
-  "from_address": "json@cases.com",
-  "subject": "JSON-ish body",
-  "body": "{\"note\": \"this body looks like JSON but is plain text\"}"
-}

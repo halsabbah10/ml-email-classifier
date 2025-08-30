@@ -1,6 +1,6 @@
 # Email Classifier System
 
-An advanced AI-powered email classification system that automatically categorizes customer support emails using machine learning. The system provides a modern web interface, REST API, and batch processing capabilities.
+An advanced AI-powered email classification system that automatically categorizes customer support emails using machine learning. The system provides a modern web interface, and batch processing capabilities.
 
 ## 🚀 Features
 
@@ -13,7 +13,6 @@ An advanced AI-powered email classification system that automatically categorize
 - **Multiple Input Methods**:
   - Manual email entry via web form
   - JSON file upload (single or batch)
-  - REST API for programmatic access
 - **Dual View Modes**: Toggle between card view and table view for email display
 - **Real-time Processing**: Instant classification with confidence scores
 - **Persistent Storage**: MySQL database with full data integrity
@@ -35,7 +34,7 @@ An advanced AI-powered email classification system that automatically categorize
 - 4GB RAM minimum
 - 2GB disk space
 
-### Option 2: Local Development
+### Option 2: Local Deployment
 - Python 3.11 or 3.12
 - Node.js 18+ and npm 9+
 - MySQL 8.0

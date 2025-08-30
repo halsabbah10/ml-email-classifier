@@ -1,5 +1,0 @@
-{
-  "from_address": "tech@mix.com",
-  "subject": "Invoice shows 503 error",
-  "body": "The invoice page returns 503 sometimes; also I think I was billed the wrong VAT."
-}

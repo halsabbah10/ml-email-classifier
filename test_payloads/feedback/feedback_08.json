@@ -1,5 +1,0 @@
-{
-  "from_address": "sara@client.io",
-  "subject": "UX feedback: Clarify error messages on forms",
-  "body": "Hello,\n\nSome validation errors are generic. More specific messages would help users correct issues faster.\n\nBest,\nSara"
-}

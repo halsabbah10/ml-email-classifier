@@ -1,5 +1,0 @@
-{
-  "from_address": "khalid@community.bh",
-  "subject": "Webhook signature verification failing",
-  "body": "Dear Team,\n\nOur webhook is failing HMAC validation after yesterday’s deploy. Has the signing secret rotated? Logs show 401 responses.\n\nThanks,\nKhalid"
-}

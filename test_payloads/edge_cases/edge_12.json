@@ -1,5 +1,0 @@
-{
-  "from_address": "long2@cases.com",
-  "subject": "Another lengthy subject line to test truncation behavior in UI rendering",
-  "body": "Body with numerous lines:\nLine 1: detail\nLine 2: detail\nLine 3: detail\nLine 4: detail\nLine 5: detail\nLine 6: detail\nLine 7: detail\nLine 8: detail\nLine 9: detail\nLine 10: detail\nLine 11: detail\nLine 12: detail\nLine 13: detail\nLine 14: detail\nLine 15: detail\nLine 16: detail\nLine 17: detail\nLine 18: detail\nLine 19: detail\nLine 20: detail\nLine 21: detail\nLine 22: detail\nLine 23: detail\nLine 24: detail\nLine 25: detail\nLine 26: detail\nLine 27: detail\nLine 28: detail\nLine 29: detail"
-}

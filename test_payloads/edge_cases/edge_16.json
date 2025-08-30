@@ -1,5 +1,0 @@
-{
-  "from_address": "html@cases.com",
-  "subject": "HTML-like content",
-  "body": "<p>This looks like HTML.</p><script>alert('xss');</script>"
-}

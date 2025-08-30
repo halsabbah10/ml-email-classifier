@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import { Email, EmailCreate } from './types';
 import { emailApi } from './api';
@@ -12,20 +12,18 @@ function App() {
   const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null);
   const [uploadProgress, setUploadProgress] = useState<string>('');
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
+  const [sortBy, setSortBy] = useState<string>('received_at');
+  const [sortOrder, setSortOrder] = useState<string>('desc');
   const [formData, setFormData] = useState<EmailCreate>({
     from_address: '',
     subject: '',
     body: ''
   });
 
-  useEffect(() => {
-    loadEmails();
-  }, []);
-
-  const loadEmails = async () => {
+  const loadEmails = useCallback(async () => {
     try {
       setLoading(true);
-      const data = await emailApi.getEmails();
+      const data = await emailApi.getEmails(0, 100, sortBy, sortOrder);
       setEmails(data);
     } catch (err) {
       setError('Failed to load emails');
@@ -33,7 +31,11 @@ function App() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [sortBy, sortOrder]);
+
+  useEffect(() => {
+    loadEmails();
+  }, [loadEmails]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,11 +86,10 @@ function App() {
       setTimeout(() => {
         setSuccess(false);
         setUploadProgress('');
+        setError(null);
+        // Clear selectedFiles after successful upload to allow selecting new files
         setSelectedFiles(null);
-        if (result.failed_count === 0) {
-          setError(null);
-        }
-      }, 4000);
+      }, 3000);
     } catch (err) {
       setError(`Upload failed: ${err}`);
       console.error('Upload error:', err);
@@ -102,6 +103,29 @@ function App() {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleClearAllEmails = async () => {
+    if (!window.confirm('Are you sure you want to delete all emails? This action cannot be undone.')) {
+      return;
+    }
+    
+    try {
+      setLoading(true);
+      const result = await emailApi.clearAllEmails();
+      setEmails([]);
+      setSuccess(true);
+      setUploadProgress(`Successfully deleted ${result.deleted_count} emails`);
+      setTimeout(() => {
+        setSuccess(false);
+        setUploadProgress('');
+      }, 3000);
+    } catch (err) {
+      setError('Failed to clear emails');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getCategoryClass = (category: string) => {
@@ -187,6 +211,16 @@ function App() {
                 </div>
                 {selectedFiles && selectedFiles.length > 0 && (
                   <div className="selected-files">
+                    <div className="files-header">
+                      <span>Selected Files ({selectedFiles.length}):</span>
+                      <button 
+                        type="button"
+                        onClick={() => setSelectedFiles(null)}
+                        className="clear-files-btn"
+                      >
+                        Clear All
+                      </button>
+                    </div>
                     {Array.from(selectedFiles).map((file, idx) => (
                       <div key={idx} className="file-item">
                         📄 {file.name} ({(file.size / 1024).toFixed(2)} KB)
@@ -249,21 +283,52 @@ function App() {
         <div className="emails-section">
           <div className="emails-header">
             <h2>Recent Emails</h2>
-            <div className="view-toggle">
-              <button 
-                className={`view-btn ${viewMode === 'cards' ? 'active' : ''}`}
-                onClick={() => setViewMode('cards')}
-                type="button"
-              >
-                📋 Cards
-              </button>
-              <button 
-                className={`view-btn ${viewMode === 'table' ? 'active' : ''}`}
-                onClick={() => setViewMode('table')}
-                type="button"
-              >
-                📊 Table
-              </button>
+            <div className="header-controls">
+              <div className="sort-controls">
+                <select 
+                  value={sortBy} 
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="sort-select"
+                >
+                  <option value="received_at">Date</option>
+                  <option value="category">Category</option>
+                  <option value="from_address">Sender</option>
+                  <option value="subject">Subject</option>
+                </select>
+                <button 
+                  onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}
+                  className="sort-order-btn"
+                  type="button"
+                >
+                  {sortOrder === 'asc' ? '↑' : '↓'}
+                </button>
+              </div>
+              <div className="view-toggle">
+                <button 
+                  className={`view-btn ${viewMode === 'cards' ? 'active' : ''}`}
+                  onClick={() => setViewMode('cards')}
+                  type="button"
+                >
+                  📋 Cards
+                </button>
+                <button 
+                  className={`view-btn ${viewMode === 'table' ? 'active' : ''}`}
+                  onClick={() => setViewMode('table')}
+                  type="button"
+                >
+                  📊 Table
+                </button>
+              </div>
+              <div className="clear-controls">
+                <button 
+                  className="clear-all-btn"
+                  onClick={handleClearAllEmails}
+                  disabled={loading || emails.length === 0}
+                  type="button"
+                >
+                  🗑️ Clear All
+                </button>
+              </div>
             </div>
           </div>
           {loading && <div className="loading">Loading emails...</div>}

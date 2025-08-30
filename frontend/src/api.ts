@@ -30,15 +30,20 @@ export const emailApi = {
     return response.data;
   },
 
-  getEmails: async (skip = 0, limit = 100): Promise<Email[]> => {
+  getEmails: async (skip = 0, limit = 100, sortBy = 'received_at', sortOrder = 'desc'): Promise<Email[]> => {
     const response = await api.get<Email[]>('/api/emails', {
-      params: { skip, limit },
+      params: { skip, limit, sort_by: sortBy, sort_order: sortOrder },
     });
     return response.data;
   },
 
   getEmail: async (id: number): Promise<Email> => {
     const response = await api.get<Email>(`/api/emails/${id}`);
+    return response.data;
+  },
+
+  clearAllEmails: async (): Promise<{ message: string; deleted_count: number }> => {
+    const response = await api.delete('/api/emails/clear-all');
     return response.data;
   },
 };
