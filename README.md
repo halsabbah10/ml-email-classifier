@@ -1,6 +1,6 @@
 # Email Classifier System
 
-An advanced AI-powered email classification system that automatically categorizes customer support emails using machine learning. The system provides a modern web interface, and batch processing capabilities.
+An email classification system that automatically categorizes customer support emails using machine learning. The system provides a modern web interface, and batch processing capabilities.
 
 ## 🚀 Features
 
@@ -379,7 +379,6 @@ Pipeline([
 - **Accuracy**: 97.1% on test set
 - **Training Time**: < 2 seconds on modern hardware
 - **Prediction Time**: < 50ms per email
-- **Model Size**: ~400KB compressed with joblib
 
 ### Classification Categories
 
@@ -488,44 +487,6 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8002';
 
 To change ports, modify `docker-compose.yml`.
 
-## 🐛 Troubleshooting
-
-### Common Issues
-
-#### MySQL Connection Failed
-```
-Error: Access denied for user 'root'@'localhost'
-```
-**Solution**: Use IP address instead of localhost:
-```bash
-DATABASE_URL=mysql+pymysql://root:password@127.0.0.1:3306/email_classifier
-```
-
-#### Port Already in Use
-```
-Error: Address already in use
-```
-**Solution**: Find and kill the process:
-```bash
-lsof -ti:8002 | xargs kill -9  # For backend
-lsof -ti:3000 | xargs kill -9  # For frontend
-```
-
-#### Scikit-learn Version Warning
-```
-InconsistentVersionWarning: Trying to unpickle estimator
-```
-**Solution**: The system uses a pre-trained model. Ensure `email_classifier.pkl` exists in the backend directory.
-
-#### Frontend Can't Connect to Backend
-**Solution**: Ensure backend is running on port 8002 and check CORS settings.
-
-#### IDE Import Errors (Pylance)
-**Solution**: Select the correct Python interpreter:
-1. Press `Cmd+Shift+P` (Mac) or `Ctrl+Shift+P` (Windows)
-2. Type "Python: Select Interpreter"
-3. Choose `./backend/venv/bin/python`
-
 ## 🧪 Testing
 
 ### Manual Testing
@@ -539,92 +500,6 @@ Use the web interface and API endpoints to verify functionality.
 - [ ] Check all 4 classification categories
 - [ ] Verify API endpoints via curl
 - [ ] Test database persistence
-
-## 🚢 Deployment
-
-### Production with Docker
-
-1. **Update environment variables for production:**
-```yaml
-# docker-compose.prod.yml
-environment:
-  - DATABASE_URL=mysql+pymysql://prod_user:strong_password@mysql:3306/email_classifier
-  - API_PORT=8002
-  - REACT_APP_API_URL=https://api.yourdomain.com
-```
-
-2. **Build and run:**
-```bash
-docker-compose -f docker-compose.prod.yml up -d
-```
-
-3. **Set up reverse proxy (nginx example):**
-```nginx
-server {
-    listen 80;
-    server_name yourdomain.com;
-    
-    location / {
-        proxy_pass http://localhost:3000;
-    }
-    
-    location /api {
-        proxy_pass http://localhost:8002;
-    }
-}
-```
-
-## 📊 Performance Metrics
-
-- **API Response Time**: < 100ms average
-- **Classification Speed**: < 50ms per email
-- **Batch Processing**: 100+ emails/second
-- **Model Accuracy**: 97.1%
-- **Frontend Load Time**: < 2 seconds
-- **Memory Usage**: < 500MB (backend), < 200MB (frontend)
-
-## 🔒 Security Considerations
-
-1. **Database**: Use strong passwords, restrict user privileges
-2. **API**: Implement rate limiting for production
-3. **Frontend**: Sanitize all user inputs
-4. **Docker**: Use specific version tags, not `latest`
-5. **Secrets**: Never commit `.env` files
-
-## 📝 Future Enhancements
-
-- [ ] User authentication and authorization
-- [ ] Email attachment processing
-- [ ] Advanced search and filtering
-- [ ] Export functionality (CSV, PDF)
-- [ ] Real-time notifications
-- [ ] Analytics dashboard
-- [ ] Multi-language support
-- [ ] Deep learning models for better accuracy
-- [ ] Email template responses
-- [ ] Webhook integrations
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 🆘 Support
-
-For issues or questions:
-1. Check the troubleshooting section
-2. Review closed issues on GitHub
-3. Open a new issue with:
-   - System information
-   - Error messages
-   - Steps to reproduce
 
 ## 🙏 Acknowledgments
 
