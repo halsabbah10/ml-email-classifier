@@ -28,28 +28,13 @@ An advanced AI-powered email classification system that automatically categorize
 
 ## 📋 Prerequisites
 
-### Option 1: Docker (Recommended - Cross-Platform)
-**Windows:**
-- Docker Desktop for Windows 4.0+
-- WSL2 enabled (recommended)
-- Docker Compose 2.0+ (included with Docker Desktop)
-- 4GB RAM minimum
-- 2GB disk space
-
-**macOS:**
+### Option 1: Docker (Recommended)
 - Docker Desktop 4.0+
 - Docker Compose 2.0+
 - 4GB RAM minimum
 - 2GB disk space
 
 ### Option 2: Local Deployment
-**Windows:**
-- Python 3.11 or 3.12 (from python.org)
-- Node.js 18+ and npm 9+ (from nodejs.org)
-- MySQL 8.0 Community Server
-- 4GB RAM minimum
-
-**macOS:**
 - Python 3.11 or 3.12
 - Node.js 18+ and npm 9+
 - MySQL 8.0
@@ -57,30 +42,16 @@ An advanced AI-powered email classification system that automatically categorize
 
 ## 🚀 Quick Start
 
-### Using Docker (Cross-Platform - Everything Automated)
+### Using Docker (Simplest - Everything Automated)
 
 1. **Navigate to the project directory:**
-
-**Windows (Command Prompt or PowerShell):**
-```cmd
-cd "email classifier"
-```
-
-**Windows (Git Bash) or macOS:**
 ```bash
 cd "email classifier"
 ```
 
 2. **Start all services:**
-
-**Windows and macOS:**
 ```bash
 docker-compose up --build
-```
-
-**Windows Note:** If using Command Prompt and the above doesn't work, try:
-```cmd
-docker compose up --build
 ```
 
 3. **Access the application:**
@@ -98,17 +69,7 @@ That's it! The system will automatically:
 
 #### Step 1: Database Setup
 
-1. **Install MySQL 8.0:**
-
-**Windows:**
-- Download MySQL 8.0 Community Server from mysql.com
-- Run the installer and follow setup wizard
-- Remember your root password during installation
-- Ensure MySQL Server is running (check Windows Services)
-
-**macOS:**
-- Install via Homebrew: `brew install mysql`
-- Or download from mysql.com
+1. **Install MySQL 8.0**
 
 2. **Create database and user:**
 ```sql
@@ -121,62 +82,23 @@ FLUSH PRIVILEGES;
 #### Step 2: Backend Setup
 
 1. **Navigate to backend directory:**
-
-**Windows (Command Prompt or PowerShell):**
-```cmd
-cd backend
-```
-
-**Windows (Git Bash) or macOS:**
 ```bash
 cd backend
 ```
 
 2. **Create Python virtual environment:**
-
-**Windows (Command Prompt):**
-```cmd
-python -m venv venv
-venv\Scripts\activate
-```
-
-**Windows (PowerShell):**
-```powershell
-python -m venv venv
-venv\Scripts\Activate.ps1
-```
-
-**Windows (Git Bash) or macOS:**
 ```bash
 python3.11 -m venv venv
-source venv/bin/activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 3. **Install dependencies:**
-
-**Windows and macOS:**
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
 4. **Create `.env` file:**
-
-**Windows (Command Prompt):**
-```cmd
-echo DATABASE_URL=mysql+pymysql://email_user:your_password@127.0.0.1:3306/email_classifier > .env
-echo API_PORT=8002 >> .env
-```
-
-**Windows (PowerShell):**
-```powershell
-@"
-DATABASE_URL=mysql+pymysql://email_user:your_password@127.0.0.1:3306/email_classifier
-API_PORT=8002
-"@ | Out-File -FilePath .env -Encoding UTF8
-```
-
-**Windows (Git Bash) or macOS:**
 ```bash
 cat > .env << 'EOF'
 DATABASE_URL=mysql+pymysql://email_user:your_password@127.0.0.1:3306/email_classifier
@@ -185,8 +107,6 @@ EOF
 ```
 
 5. **Start the backend:**
-
-**Windows and macOS:**
 ```bash
 python main.py
 ```
@@ -200,27 +120,16 @@ The backend will:
 #### Step 3: Frontend Setup
 
 1. **Open new terminal and navigate to frontend:**
-
-**Windows (Command Prompt or PowerShell):**
-```cmd
-cd frontend
-```
-
-**Windows (Git Bash) or macOS:**
 ```bash
 cd frontend
 ```
 
 2. **Install dependencies:**
-
-**Windows and macOS:**
 ```bash
 npm install
 ```
 
 3. **Start the development server:**
-
-**Windows and macOS:**
 ```bash
 npm start
 ```
@@ -591,41 +500,6 @@ server {
 4. **Docker**: Use specific version tags, not `latest`
 5. **Secrets**: Never commit `.env` files
 
-## 📝 Future Enhancements
-
-- [ ] User authentication and authorization
-- [ ] Email attachment processing
-- [ ] Advanced search and filtering
-- [ ] Export functionality (CSV, PDF)
-- [ ] Real-time notifications
-- [ ] Analytics dashboard
-- [ ] Multi-language support
-- [ ] Deep learning models for better accuracy
-- [ ] Email template responses
-- [ ] Webhook integrations
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 🆘 Support
-
-For issues or questions:
-1. Check the troubleshooting section
-2. Review closed issues on GitHub
-3. Open a new issue with:
-   - System information
-   - Error messages
-   - Steps to reproduce
-
 ## 🙏 Acknowledgments
 
 - FastAPI for the excellent web framework
@@ -634,4 +508,4 @@ For issues or questions:
 - MySQL for reliable data storage
 
 ---
-Built with ❤️ for efficient email management
+Built by Husam AlSabbah for efficient email management
