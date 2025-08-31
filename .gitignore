@@ -47,8 +47,6 @@ frontend/.env.production.local
 # Database
 mysql_data/
 
-# ML Model (can be regenerated)
-*.joblib
 
 # Docker
 *.log

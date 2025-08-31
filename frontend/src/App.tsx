@@ -386,6 +386,16 @@ function App() {
           )}
         </div>
       </div>
+      
+      <footer className="app-footer">
+        <div className="footer-content">
+          <span className="footer-tech">Powered by TF-IDF + Linear SVM</span>
+          <span className="footer-separator">|</span>
+          <span className="footer-author">Built by Husam AlSabbah</span>
+          <span className="footer-separator">|</span>
+          <span className="footer-copyright">© 2025</span>
+        </div>
+      </footer>
     </div>
   );
 }

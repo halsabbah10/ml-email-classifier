@@ -22,8 +22,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copy application code
 COPY . .
 
-# Create data directory for CSV dataset
-RUN mkdir -p /app/data
+# No CSV dataset files needed - using backup model
 
 # Expose the API port
 EXPOSE 8002
