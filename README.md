@@ -28,13 +28,28 @@ An advanced AI-powered email classification system that automatically categorize
 
 ## 📋 Prerequisites
 
-### Option 1: Docker (Recommended)
+### Option 1: Docker (Recommended - Cross-Platform)
+**Windows:**
+- Docker Desktop for Windows 4.0+
+- WSL2 enabled (recommended)
+- Docker Compose 2.0+ (included with Docker Desktop)
+- 4GB RAM minimum
+- 2GB disk space
+
+**macOS:**
 - Docker Desktop 4.0+
 - Docker Compose 2.0+
 - 4GB RAM minimum
 - 2GB disk space
 
 ### Option 2: Local Deployment
+**Windows:**
+- Python 3.11 or 3.12 (from python.org)
+- Node.js 18+ and npm 9+ (from nodejs.org)
+- MySQL 8.0 Community Server
+- 4GB RAM minimum
+
+**macOS:**
 - Python 3.11 or 3.12
 - Node.js 18+ and npm 9+
 - MySQL 8.0
@@ -42,16 +57,30 @@ An advanced AI-powered email classification system that automatically categorize
 
 ## 🚀 Quick Start
 
-### Using Docker (Simplest - Everything Automated)
+### Using Docker (Cross-Platform - Everything Automated)
 
 1. **Navigate to the project directory:**
+
+**Windows (Command Prompt or PowerShell):**
+```cmd
+cd "email classifier"
+```
+
+**Windows (Git Bash) or macOS:**
 ```bash
 cd "email classifier"
 ```
 
 2. **Start all services:**
+
+**Windows and macOS:**
 ```bash
 docker-compose up --build
+```
+
+**Windows Note:** If using Command Prompt and the above doesn't work, try:
+```cmd
+docker compose up --build
 ```
 
 3. **Access the application:**
@@ -69,7 +98,17 @@ That's it! The system will automatically:
 
 #### Step 1: Database Setup
 
-1. **Install MySQL 8.0**
+1. **Install MySQL 8.0:**
+
+**Windows:**
+- Download MySQL 8.0 Community Server from mysql.com
+- Run the installer and follow setup wizard
+- Remember your root password during installation
+- Ensure MySQL Server is running (check Windows Services)
+
+**macOS:**
+- Install via Homebrew: `brew install mysql`
+- Or download from mysql.com
 
 2. **Create database and user:**
 ```sql
@@ -82,23 +121,62 @@ FLUSH PRIVILEGES;
 #### Step 2: Backend Setup
 
 1. **Navigate to backend directory:**
+
+**Windows (Command Prompt or PowerShell):**
+```cmd
+cd backend
+```
+
+**Windows (Git Bash) or macOS:**
 ```bash
 cd backend
 ```
 
 2. **Create Python virtual environment:**
+
+**Windows (Command Prompt):**
+```cmd
+python -m venv venv
+venv\Scripts\activate
+```
+
+**Windows (PowerShell):**
+```powershell
+python -m venv venv
+venv\Scripts\Activate.ps1
+```
+
+**Windows (Git Bash) or macOS:**
 ```bash
 python3.11 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate
 ```
 
 3. **Install dependencies:**
+
+**Windows and macOS:**
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
 4. **Create `.env` file:**
+
+**Windows (Command Prompt):**
+```cmd
+echo DATABASE_URL=mysql+pymysql://email_user:your_password@127.0.0.1:3306/email_classifier > .env
+echo API_PORT=8002 >> .env
+```
+
+**Windows (PowerShell):**
+```powershell
+@"
+DATABASE_URL=mysql+pymysql://email_user:your_password@127.0.0.1:3306/email_classifier
+API_PORT=8002
+"@ | Out-File -FilePath .env -Encoding UTF8
+```
+
+**Windows (Git Bash) or macOS:**
 ```bash
 cat > .env << 'EOF'
 DATABASE_URL=mysql+pymysql://email_user:your_password@127.0.0.1:3306/email_classifier
@@ -107,6 +185,8 @@ EOF
 ```
 
 5. **Start the backend:**
+
+**Windows and macOS:**
 ```bash
 python main.py
 ```
@@ -120,16 +200,27 @@ The backend will:
 #### Step 3: Frontend Setup
 
 1. **Open new terminal and navigate to frontend:**
+
+**Windows (Command Prompt or PowerShell):**
+```cmd
+cd frontend
+```
+
+**Windows (Git Bash) or macOS:**
 ```bash
 cd frontend
 ```
 
 2. **Install dependencies:**
+
+**Windows and macOS:**
 ```bash
 npm install
 ```
 
 3. **Start the development server:**
+
+**Windows and macOS:**
 ```bash
 npm start
 ```
